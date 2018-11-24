@@ -39,6 +39,7 @@ public class Controller {
     // components
     @FXML Button buttonUpload, buttonSave, buttonPrevious, buttonNext;
     @FXML Label passoAtual;
+    @FXML public Label dimensoes;
     @FXML ListView<String> passos;
     @FXML ImageView imageView;
 
@@ -66,12 +67,19 @@ public class Controller {
             if(selecionada.exists()){
                 utils.Cache.clearCache();
 
-                // se cópia da imagem para cache for bem sucedida, mostramos
+                // guarda original em cache
                 Cache.copyToCache(selecionada.getAbsolutePath(), "original.png");
 
+                // pega original do cache e redimensiona
                 if(utils.Cache.resizeImage(new File(CACHE + "/original.png"))){
-                    imageView.setImage(utils.Cache.cacheToImage("original.png"));
+                    Image resultado = Cache.cacheToImage("original.png");
+
+                    // mostramos a imagem
+                    imageView.setImage(resultado);
                     imageView.setFitHeight(392);
+
+                    // setamos label de dimensões
+                    setDimensoes(resultado.getWidth(), resultado.getHeight());
 
                     // adiciona na lista de passos
                     limpaListaPassos();
@@ -216,5 +224,8 @@ public class Controller {
         }
     }
 
+    public void setDimensoes(Double largura, Double altura){
+        this.dimensoes.setText("(" + largura + " x " + altura + ")");
+    }
 
 }

@@ -82,18 +82,22 @@ public class Cache {
         try {
             BufferedImage image = ImageIO.read(file);
 
-            Mat src = imread(Controller.CACHE + "/original.png");
-            Mat resizeimage = new Mat();
-            Size scaleSize = new Size(image.getWidth()*4,image.getHeight()*4);
+            // se imagem já estiver com boa resolução, não redimensionamos
+            if(image.getWidth() > 1200 || image.getHeight() > 1080){
+                return true;
+            } else {
+                Mat src = imread(Controller.CACHE + "/original.png");
+                Mat resizeimage = new Mat();
+                Size scaleSize = new Size(image.getWidth() * 4, image.getHeight() * 4);
 
-            Imgproc.resize(src, resizeimage, scaleSize, Imgproc.INTER_AREA);
+                Imgproc.resize(src, resizeimage, scaleSize, Imgproc.INTER_AREA);
+                HighGui.toBufferedImage(resizeimage);
 
-            HighGui.toBufferedImage(resizeimage);
+                File output = new File(Controller.CACHE + "/original.png");
+                ImageIO.write(Utils.matToBufferedImage(resizeimage), "png", output);
 
-            File output = new File(Controller.CACHE + "/original.png");
-            ImageIO.write(Utils.matToBufferedImage(resizeimage), "png", output);
-
-            return true;
+                return true;
+            }
         } catch (Exception e){
             System.out.println("Erro ao redimensionar e salvar imagem");
             return false;
