@@ -19,6 +19,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class OpenCV {
 
@@ -27,8 +28,7 @@ public class OpenCV {
 
     public static File tonsDeCinza(File file){
         try {
-            File input = file;
-            BufferedImage image = ImageIO.read(input);
+            BufferedImage image = Utils.file2BufferedImage(file);
 
             byte[] data = ((DataBufferByte) image.getRaster().getDataBuffer()).getData();
             Mat mat = new Mat(image.getHeight(), image.getWidth(), CvType.CV_8UC3);
@@ -57,8 +57,8 @@ public class OpenCV {
     public static File limiarizacao(File file){
         try {
             Mat dest = new Mat();
+            Mat src = Utils.file2Mat(file);
 
-            Mat src = Imgcodecs.imread(file.getAbsolutePath());
             Imgproc.threshold(src, dest, 90, 255, Imgproc.THRESH_BINARY);
 
             HighGui.toBufferedImage(dest);
@@ -79,7 +79,7 @@ public class OpenCV {
         try {
             Mat dest = new Mat();
 
-            Mat src = Imgcodecs.imread(file.getAbsolutePath());
+            Mat src = Utils.file2Mat(file);
             Imgproc.GaussianBlur(src, dest, new Size(5,5), 0);
 
             HighGui.toBufferedImage(dest);
@@ -96,49 +96,67 @@ public class OpenCV {
         }
     }
 
-//    public static File buscaContornos(File file){
-//        try {
-//            List<MatOfPoint> contours = new ArrayList<>();
-//            Mat hierarchy = new Mat();
-//
-//            Mat src = Imgcodecs.imread(file.getAbsolutePath());
-//
-//            Imgproc.findContours(src, contours, hierarchy, Imgproc.RETR_TREE, Imgproc.CHAIN_APPROX_NONE);
-//
-//            HighGui.toBufferedImage(src);
-//
-//            File output = new File("./src/assets/temp/busca-contornos.png");
-//            ImageIO.write(Utils.matToBufferedImage(src), "png", output);
-//
-//            // pega imagem na pasta do cache e devolve
-//            return Cache.cacheToFile("busca-contornos.png");
-//
-//        } catch (Exception e){
-//            System.out.println("Problema aplicar filtro desfoque na imagem");
-//            return null;
-//        }
-//    }
-
     public static File buscaContornos(File file){
-        CascadeClassifier faceDetector = new CascadeClassifier("./src/utils/car.xml");
-        Mat image = Imgcodecs.imread(file.getAbsolutePath());
+        try {
+            // gera números randomicos para cor dos traços
+            Random rng = new Random(12345);
 
-        MatOfRect detections = new MatOfRect();
-        faceDetector.detectMultiScale(image, detections);
+            Mat image = Utils.file2Mat(file);
+            Mat srcGray = new Mat();
+            Mat cannyOutput = new Mat();
+            List<MatOfPoint> contours = new ArrayList<>();
+            Mat hierarchy = new Mat();
+            MatOfPoint max_contour = new MatOfPoint();
 
-        System.out.println(String.format("Detected %s", detections.toArray().length));
+            Imgproc.cvtColor(image, srcGray, Imgproc.COLOR_BGR2GRAY);
+            Imgproc.Canny(srcGray, cannyOutput, 0, 255);
+            Imgproc.findContours(cannyOutput, contours, hierarchy, Imgproc.RETR_TREE, Imgproc.CHAIN_APPROX_SIMPLE);
 
-        for (Rect rect : detections.toArray()) {
-            Imgproc.rectangle(image, new Point(rect.x, rect.y), new Point(rect.x + rect.width, rect.y + rect.height), new Scalar(0, 255, 0), 3);
+            // desenha contornos encontrados
+            Mat drawing = Mat.zeros(cannyOutput.size(), CvType.CV_8UC3);
+            for (int i = 0; i < contours.size(); i++) {
+                Scalar color = new Scalar(rng.nextInt(256), rng.nextInt(256), rng.nextInt(256));
+                Imgproc.drawContours(drawing, contours, i, color, 2, Imgproc.LINE_8, hierarchy, 0, new Point());
+            }
+
+            System.out.println(contours.get(0).toArray());
+//            double epsilon = 0.1*Imgproc.arcLength(new MatOfPoint2f(contours.get(0).toArray()),true);
+//            MatOfPoint2f approx = new MatOfPoint2f();
+//            Imgproc.approxPolyDP(new MatOfPoint2f(max_contour.toArray()),approx,epsilon,true);
+//
+
+            File output = new File(Controller.CACHE + "/busca-contornos.png");
+            ImageIO.write(Utils.matToBufferedImage(drawing), "png", output);
+
+            return Cache.cacheToFile("busca-contornos.png");
+
+        } catch (Exception e){
+            System.out.println("Problema aplicar buscaContornos()");
+            return null;
         }
-
-        MatOfByte mtb = new MatOfByte();
-        Imgcodecs.imencode(".png", image, mtb);
-
-        Image img = new Image(new ByteArrayInputStream(mtb.toArray()));
-        Cache.imageToCache(img, "busca-contornos.png");
-
-        return Cache.cacheToFile("busca-contornos.png");
     }
+
+//    utilizando classificadores
+//    public static File buscaContornos(File file){
+//        CascadeClassifier faceDetector = new CascadeClassifier("./src/utils/car.xml");
+//        Mat image = Imgcodecs.imread(file.getAbsolutePath());
+//
+//        MatOfRect detections = new MatOfRect();
+//        faceDetector.detectMultiScale(image, detections);
+//
+//        System.out.println(String.format("Detected %s", detections.toArray().length));
+//
+//        for (Rect rect : detections.toArray()) {
+//            Imgproc.rectangle(image, new Point(rect.x, rect.y), new Point(rect.x + rect.width, rect.y + rect.height), new Scalar(0, 255, 0), 3);
+//        }
+//
+//        MatOfByte mtb = new MatOfByte();
+//        Imgcodecs.imencode(".png", image, mtb);
+//
+//        Image img = new Image(new ByteArrayInputStream(mtb.toArray()));
+//        Cache.imageToCache(img, "busca-contornos.png");
+//
+//        return Cache.cacheToFile("busca-contornos.png");
+//    }
 
 }

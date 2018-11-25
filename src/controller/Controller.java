@@ -16,8 +16,10 @@ import utils.OpenCV;
 import utils.Utils;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import static javax.imageio.ImageIO.write;
@@ -25,7 +27,7 @@ import static javax.imageio.ImageIO.write;
 public class Controller {
 
     // LISTA DE PASSOS
-    private final String
+    public static final String
         ORIGINAL = "Imagem original",
         TONS_DE_CINZA = "Passo 1: Tons de cinza",
         LIMIARIZACAO = "Passo 2: Limiarização",
@@ -44,8 +46,8 @@ public class Controller {
     @FXML ImageView imageView;
 
     // auxiliares
-    private Image image;
-    private File file;
+    public Image image;
+    public File file;
     public ArrayList<String> listaPassos = new ArrayList();
     public String etapa = "";
 
@@ -86,6 +88,8 @@ public class Controller {
                     adicionaPasso(ORIGINAL);
                     etapa = ORIGINAL;
                     labelPassoAtual(ORIGINAL);
+
+                    file = Cache.cacheToFile("original.png");
                 }
             }
         } catch (Exception e){
@@ -144,8 +148,8 @@ public class Controller {
     private void next(){
         switch (etapa){
             case ORIGINAL:
-                if(Cache.imageToCache(imageView.getImage(), "tonsdecinza.png")){
-                    file = OpenCV.tonsDeCinza(new File("./src/assets/temp/tonsdecinza.png"));
+                if(Cache.imageToCache(imageView.getImage(), "tonsdecinza.png")) {
+                    file = OpenCV.tonsDeCinza(new File(CACHE + "/tonsdecinza.png"));
                     imageView.setImage(Cache.cacheToImage("tonsdecinza.png"));
 
                     setComponents("adicionar", ORIGINAL, TONS_DE_CINZA);
@@ -154,7 +158,7 @@ public class Controller {
 
             case TONS_DE_CINZA:
                 if(Cache.imageToCache(imageView.getImage(), "limiarizacao.png")) {
-                    file = OpenCV.limiarizacao(new File("./src/assets/temp/limiarizacao.png"));
+                    file = OpenCV.limiarizacao(new File(CACHE + "/limiarizacao.png"));
                     imageView.setImage(Cache.cacheToImage("limiarizacao.png"));
 
                     setComponents("adicionar", TONS_DE_CINZA, LIMIARIZACAO);
@@ -163,7 +167,7 @@ public class Controller {
 
             case LIMIARIZACAO:
                 if(Cache.imageToCache(imageView.getImage(), "desfoque.png")) {
-                    file = OpenCV.desfoque(new File("./src/assets/temp/desfoque.png"));
+                    file = OpenCV.desfoque(new File(CACHE + "/desfoque.png"));
                     imageView.setImage(Cache.cacheToImage("desfoque.png"));
 
                     setComponents("adicionar", LIMIARIZACAO, DESFOQUE);
@@ -172,7 +176,7 @@ public class Controller {
 
             case DESFOQUE:
                 if(Cache.imageToCache(imageView.getImage(), "busca-contornos.png")) {
-                    file = OpenCV.buscaContornos(new File("./src/assets/temp/busca-contornos.png"));
+                    file = OpenCV.buscaContornos(new File(CACHE + "/busca-contornos.png"));
                     imageView.setImage(Cache.cacheToImage("busca-contornos.png"));
 
                     setComponents("adicionar", DESFOQUE, BUSCA_CONTORNOS);
@@ -188,6 +192,13 @@ public class Controller {
     @FXML
     private void github(){
         Utils.openWebpage("https://github.com/tiagoboeing/ReconhecimentoPlacas-PDI");
+    }
+
+    @FXML
+    private void lightbox() throws IOException {
+        if(imageView.getImage() != null){
+            Desktop.getDesktop().open(file);
+        }
     }
 
     public void adicionaPasso(String nome){

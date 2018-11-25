@@ -62,7 +62,7 @@
                         </Label>
                      </children>
                   </HBox>
-                  <ImageView fx:id="imageView" fitHeight="392.0" fitWidth="521.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imageView" fitHeight="392.0" fitWidth="521.0" onMouseClicked="#lightbox" pickOnBounds="true" preserveRatio="true" />
                </children>
             </VBox>
          </center>

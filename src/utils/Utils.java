@@ -3,10 +3,14 @@ package utils;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 import org.opencv.core.Mat;
+import org.opencv.imgcodecs.Imgcodecs;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 
 public class Utils {
@@ -43,6 +47,19 @@ public class Utils {
             return SwingFXUtils.toFXImage(matToBufferedImage(frame), null);
         }catch (Exception e){
             System.err.println("Cannot convert the Mat obejct: " + e);
+            return null;
+        }
+    }
+
+    public static Mat file2Mat(File file){
+        return Imgcodecs.imread(file.getAbsolutePath());
+    }
+
+    public static BufferedImage file2BufferedImage(File file){
+        try {
+            return ImageIO.read(file);
+        } catch (IOException e) {
+            System.out.println("Problema ao converter File2BufferedImage - file: Utils.java");
             return null;
         }
     }
