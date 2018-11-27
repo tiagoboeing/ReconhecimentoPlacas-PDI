@@ -177,17 +177,13 @@ public class Controller {
             case DESFOQUE:
                 file = OpenCV.buscaContornos(new File(CACHE + "/original.png"));
                 imageView.setImage(Cache.cacheToImage("busca-contornos.png"));
-
                 setComponents("adicionar", DESFOQUE, BUSCA_CONTORNOS);
                 break;
 
             case BUSCA_CONTORNOS:
-                if(Cache.imageToCache(imageView.getImage(), "busca-retangulos.png")) {
-                    file = OpenCV.buscaRetangulos(new File(CACHE + "/desfoque.png"));
-                    imageView.setImage(Cache.cacheToImage("busca-retangulos.png"));
-
-                    setComponents("adicionar", BUSCA_CONTORNOS, SEGMENTACAO_RETANGULOS);
-                }
+                file = OpenCV.buscaRetangulos(new File(CACHE + "/original.png"));
+                imageView.setImage(Cache.cacheToImage("busca-retangulos.png"));
+                setComponents("adicionar", BUSCA_CONTORNOS, SEGMENTACAO_RETANGULOS);
                 break;
         }
     }
