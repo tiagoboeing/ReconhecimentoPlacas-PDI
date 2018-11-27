@@ -6,12 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/OpenCV.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/OpenCV.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/car.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/car.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/main.fxml" afterDir="false" />
-    </list>
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="" />
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -111,8 +106,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/controller/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="331">
-              <caret line="211" column="5" lean-forward="true" selection-start-line="211" selection-start-column="5" selection-end-line="211" selection-end-column="5" />
+            <state relative-caret-position="186">
+              <caret line="154" column="43" lean-forward="true" selection-start-line="154" selection-start-column="43" selection-end-line="154" selection-end-column="43" />
               <folding>
                 <element signature="initializer##0;class#Controller#0" />
                 <element signature="method#upload#0;class#Controller#0" />
@@ -135,24 +130,14 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/utils/OpenCV.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="303">
-              <caret line="280" lean-forward="true" selection-start-line="280" selection-end-line="280" />
+            <state relative-caret-position="497">
+              <caret line="127" column="13" lean-forward="true" selection-start-line="105" selection-start-column="12" selection-end-line="127" selection-end-column="13" />
               <folding>
                 <element signature="initializer##0;class#OpenCV#0" />
-                <element signature="method#tonsDeCinza#0;class#OpenCV#0" />
                 <element signature="method#buscaRetangulos#0;class#OpenCV#0" />
                 <element signature="e#7260#7312#0" />
                 <element signature="method#getFirstThreeCoordinates#0;class#OpenCV#0" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar://$PROJECT_DIR$/lib/opencv-40011.jar!/org/opencv/imgproc/Imgproc.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="219">
-              <caret line="3572" column="23" selection-start-line="3572" selection-start-column="23" selection-end-line="3572" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -290,7 +275,7 @@
     <property name="Repository.Attach.Sources" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543344154589" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543348233514" />
     <property name="dynamic.classpath" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/opencv_java400.dll" />
     <property name="project.structure.last.edited" value="Modules" />
@@ -400,12 +385,12 @@
       <workItem from="1543089999159" duration="27165000" />
       <workItem from="1543169784147" duration="9334000" />
       <workItem from="1543182657949" duration="4241000" />
-      <workItem from="1543319471070" duration="15193000" />
+      <workItem from="1543319471070" duration="17353000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="91277000" />
+    <option name="totallyTimeSpent" value="93437000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -639,10 +624,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/utils/car.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="589">
+          <caret line="2656" lean-forward="true" selection-start-line="2656" selection-end-line="2656" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/controller/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="331">
-          <caret line="211" column="5" lean-forward="true" selection-start-line="211" selection-start-column="5" selection-end-line="211" selection-end-column="5" />
+        <state relative-caret-position="186">
+          <caret line="154" column="43" lean-forward="true" selection-start-line="154" selection-start-column="43" selection-end-line="154" selection-end-column="43" />
           <folding>
             <element signature="initializer##0;class#Controller#0" />
             <element signature="method#upload#0;class#Controller#0" />
@@ -661,20 +653,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/utils/car.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="589">
-          <caret line="2656" lean-forward="true" selection-start-line="2656" selection-end-line="2656" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/utils/OpenCV.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="303">
-          <caret line="280" lean-forward="true" selection-start-line="280" selection-end-line="280" />
+        <state relative-caret-position="497">
+          <caret line="127" column="13" lean-forward="true" selection-start-line="105" selection-start-column="12" selection-end-line="127" selection-end-column="13" />
           <folding>
             <element signature="initializer##0;class#OpenCV#0" />
-            <element signature="method#tonsDeCinza#0;class#OpenCV#0" />
             <element signature="method#buscaRetangulos#0;class#OpenCV#0" />
             <element signature="e#7260#7312#0" />
             <element signature="method#getFirstThreeCoordinates#0;class#OpenCV#0" />
