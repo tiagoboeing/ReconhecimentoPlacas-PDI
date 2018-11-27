@@ -114,16 +114,15 @@ public class OpenCV {
 
             // lista de contornos
             List<MatOfPoint> contours = new ArrayList<>();
-            List<MatOfPoint> approx = new ArrayList<>();
 
             image.convertTo(image, CvType.CV_8UC1);
 
-//            Imgproc.cvtColor(image, srcGray, Imgproc.COLOR_BGR2GRAY);
-//            Imgproc.Canny(srcGray, cannyOutput, 0, 255);
-            Imgproc.findContours(image, contours, hierarchy, Imgproc.RETR_TREE, Imgproc.CHAIN_APPROX_NONE);
+            Imgproc.cvtColor(image, srcGray, Imgproc.COLOR_BGR2GRAY);
+            Imgproc.Canny(srcGray, cannyOutput, 0, 255);
+            Imgproc.findContours(cannyOutput, contours, hierarchy, Imgproc.RETR_TREE, Imgproc.CHAIN_APPROX_NONE);
 
             // desenha contornos encontrados
-            Mat drawing = Mat.zeros(hierarchy.size(), CvType.CV_8UC3);
+            Mat drawing = Mat.zeros(cannyOutput.size(), CvType.CV_8UC3);
             for (int i = 0; i < contours.size(); i++) {
                 Scalar color = new Scalar(rng.nextInt(256), rng.nextInt(256), rng.nextInt(256));
                 Imgproc.drawContours(drawing, contours, i, color, 2, Imgproc.LINE_8, hierarchy, 0, new Point());
