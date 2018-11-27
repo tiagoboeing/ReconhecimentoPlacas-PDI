@@ -20,7 +20,10 @@
    <top>
       <MenuBar BorderPane.alignment="CENTER">
          <menus>
-            <Menu mnemonicParsing="false" text="Leonardo May, Tiago Boeing" />
+            <Menu mnemonicParsing="false" text="Leonardo May, Tiago Boeing">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#usaClassificadores" text="Utilizar classificadores" />
+               </items></Menu>
             <Menu mnemonicParsing="false" text="Sobre">
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#github" text="Código-fonte" />

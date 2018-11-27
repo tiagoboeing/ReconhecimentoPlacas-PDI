@@ -184,9 +184,6 @@ public class OpenCV {
                 }
             }
 
-            System.out.println();
-
-
             File output = new File(Controller.CACHE + "/busca-retangulos.png");
             ImageIO.write(Utils.matToBufferedImage(image), "png", output);
 
@@ -273,26 +270,26 @@ public class OpenCV {
     }
 
 //    utilizando classificadores
-//    public static File buscaContornos(File file){
-//        CascadeClassifier faceDetector = new CascadeClassifier("./src/utils/car.xml");
-//        Mat image = Imgcodecs.imread(file.getAbsolutePath());
-//
-//        MatOfRect detections = new MatOfRect();
-//        faceDetector.detectMultiScale(image, detections);
-//
-//        System.out.println(String.format("Detected %s", detections.toArray().length));
-//
-//        for (Rect rect : detections.toArray()) {
-//            Imgproc.rectangle(image, new Point(rect.x, rect.y), new Point(rect.x + rect.width, rect.y + rect.height), new Scalar(0, 255, 0), 3);
-//        }
-//
-//        MatOfByte mtb = new MatOfByte();
-//        Imgcodecs.imencode(".png", image, mtb);
-//
-//        Image img = new Image(new ByteArrayInputStream(mtb.toArray()));
-//        Cache.imageToCache(img, "busca-contornos.png");
-//
-//        return Cache.cacheToFile("busca-contornos.png");
-//    }
+    public static File usaClassificadores(File file){
+        CascadeClassifier faceDetector = new CascadeClassifier("./src/utils/car.xml");
+        Mat image = Imgcodecs.imread(file.getAbsolutePath());
+
+        MatOfRect detections = new MatOfRect();
+        faceDetector.detectMultiScale(image, detections);
+
+        System.out.println(String.format("Detected %s", detections.toArray().length));
+
+        for (Rect rect : detections.toArray()) {
+            Imgproc.rectangle(image, new Point(rect.x, rect.y), new Point(rect.x + rect.width, rect.y + rect.height), new Scalar(0, 255, 0), 3);
+        }
+
+        MatOfByte mtb = new MatOfByte();
+        Imgcodecs.imencode(".png", image, mtb);
+
+        Image img = new Image(new ByteArrayInputStream(mtb.toArray()));
+        Cache.imageToCache(img, "classificadores.png");
+
+        return Cache.cacheToFile("classificadores.png");
+    }
 
 }

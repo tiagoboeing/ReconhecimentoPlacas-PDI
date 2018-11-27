@@ -203,6 +203,14 @@ public class Controller {
         }
     }
 
+    @FXML
+    private void usaClassificadores(){
+        if(imageView.getImage() != null) {
+            file = OpenCV.usaClassificadores(new File(CACHE + "/original.png"));
+            imageView.setImage(Cache.cacheToImage("classificadores.png"));
+        }
+    }
+
     public void adicionaPasso(String nome){
         listaPassos.add(nome);
         passos.setItems(FXCollections.observableArrayList(listaPassos));
