@@ -175,12 +175,10 @@ public class Controller {
                 break;
 
             case DESFOQUE:
-                if(Cache.imageToCache(imageView.getImage(), "busca-contornos.png")) {
-                    file = OpenCV.buscaContornos(new File(CACHE + "/busca-contornos.png"));
-                    imageView.setImage(Cache.cacheToImage("busca-contornos.png"));
+                file = OpenCV.buscaContornos(new File(CACHE + "/original.png"));
+                imageView.setImage(Cache.cacheToImage("busca-contornos.png"));
 
-                    setComponents("adicionar", DESFOQUE, BUSCA_CONTORNOS);
-                }
+                setComponents("adicionar", DESFOQUE, BUSCA_CONTORNOS);
                 break;
 
             case BUSCA_CONTORNOS:

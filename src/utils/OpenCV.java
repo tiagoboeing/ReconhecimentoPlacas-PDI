@@ -108,6 +108,8 @@ public class OpenCV {
 
             Mat image = Utils.file2Mat(file);
             Mat srcGray = new Mat();
+            Mat dest = new Mat();
+            Mat desfoque = new Mat();
             Mat cannyOutput = new Mat();
             Mat hierarchy = new Mat();
             MatOfPoint max_contour = new MatOfPoint();
@@ -115,14 +117,15 @@ public class OpenCV {
             // lista de contornos
             List<MatOfPoint> contours = new ArrayList<>();
 
-            image.convertTo(image, CvType.CV_8UC1);
-
             Imgproc.cvtColor(image, srcGray, Imgproc.COLOR_BGR2GRAY);
-            Imgproc.Canny(srcGray, cannyOutput, 0, 255);
-            Imgproc.findContours(cannyOutput, contours, hierarchy, Imgproc.RETR_TREE, Imgproc.CHAIN_APPROX_NONE);
+            Imgproc.threshold(srcGray, dest, 90, 255, Imgproc.THRESH_BINARY);
+            Imgproc.GaussianBlur(dest, desfoque, new Size(5,5), 0);
+
+//            Imgproc.Canny(srcGray, cannyOutput, 0, 255);
+            Imgproc.findContours(desfoque, contours, hierarchy, Imgproc.RETR_TREE, Imgproc.CHAIN_APPROX_NONE);
 
             // desenha contornos encontrados
-            Mat drawing = Mat.zeros(cannyOutput.size(), CvType.CV_8UC3);
+            Mat drawing = Mat.zeros(desfoque.size(), CvType.CV_8UC3);
             for (int i = 0; i < contours.size(); i++) {
                 Scalar color = new Scalar(rng.nextInt(256), rng.nextInt(256), rng.nextInt(256));
                 Imgproc.drawContours(drawing, contours, i, color, 2, Imgproc.LINE_8, hierarchy, 0, new Point());
@@ -152,7 +155,7 @@ public class OpenCV {
             List<MatOfPoint> contours = new ArrayList<>();
             List<MatOfPoint> approx = new ArrayList<>();
 
-            Imgproc.cvtColor(image, srcGray, Imgproc.COLOR_BGR2GRAY);
+            Imgproc.cvtColor(image, new Mat(), Imgproc.COLOR_BGR2GRAY);
             Imgproc.Canny(srcGray, cannyOutput, 0, 255);
             Imgproc.findContours(cannyOutput, contours, hierarchy, Imgproc.RETR_TREE, Imgproc.CHAIN_APPROX_NONE);
 

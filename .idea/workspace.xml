@@ -7,6 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/src/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/utils/OpenCV.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/OpenCV.java" afterDir="false" />
     </list>
     <ignored path="JavaFxApplication.iws" />
@@ -74,12 +75,12 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="fxml" value="13" />
-          <entry key="java" value="15998" />
+          <entry key="java" value="16062" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="15998" />
+          <entry key="JAVA" value="16062" />
           <entry key="XML" value="13" />
         </counts>
       </usages-collector>
@@ -107,8 +108,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/controller/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="186">
-              <caret line="187" selection-start-line="187" selection-end-line="187" />
+            <state relative-caret-position="418">
+              <caret line="180" column="70" selection-start-line="180" selection-start-column="70" selection-end-line="180" selection-end-column="70" />
               <folding>
                 <element signature="initializer##0;class#Controller#0" />
                 <element signature="method#upload#0;class#Controller#0" />
@@ -128,11 +129,15 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/utils/OpenCV.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="116" lean-forward="true" selection-start-line="116" selection-end-line="116" />
+            <state relative-caret-position="506">
+              <caret line="132" lean-forward="true" selection-start-line="132" selection-end-line="132" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#desfoque#0;class#OpenCV#0" />
+                <element signature="initializer##0;class#OpenCV#0" />
+                <element signature="method#tonsDeCinza#0;class#OpenCV#0" />
+                <element signature="method#buscaRetangulos#0;class#OpenCV#0" />
+                <element signature="e#6062#6143#0" />
+                <element signature="method#getFirstThreeCoordinates#0;class#OpenCV#0" />
+                <element signature="e#8741#8773#0" />
               </folding>
             </state>
           </provider>
@@ -383,12 +388,12 @@
       <workItem from="1543089999159" duration="27165000" />
       <workItem from="1543169784147" duration="9334000" />
       <workItem from="1543182657949" duration="4241000" />
-      <workItem from="1543319471070" duration="9093000" />
+      <workItem from="1543319471070" duration="10556000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="85177000" />
+    <option name="totallyTimeSpent" value="86640000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -587,25 +592,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/Controller.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="186">
-          <caret line="187" selection-start-line="187" selection-end-line="187" />
-          <folding>
-            <element signature="initializer##0;class#Controller#0" />
-            <element signature="method#upload#0;class#Controller#0" />
-            <element signature="method#save#0;class#Controller#0" />
-            <element signature="method#previous#0;class#Controller#0" />
-            <element signature="method#lightbox#0;class#Controller#0" />
-            <element signature="method#adicionaPasso#0;class#Controller#0" />
-            <element signature="method#removePasso#0;class#Controller#0" />
-            <element signature="method#limpaListaPassos#0;class#Controller#0" />
-            <element signature="method#setComponents#0;class#Controller#0" />
-            <element signature="method#setDimensoes#0;class#Controller#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/lib/opencv-40011.jar!/org/opencv/core/CvType.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="229">
@@ -634,13 +620,36 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/Controller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="180" column="70" selection-start-line="180" selection-start-column="70" selection-end-line="180" selection-end-column="70" />
+          <folding>
+            <element signature="initializer##0;class#Controller#0" />
+            <element signature="method#upload#0;class#Controller#0" />
+            <element signature="method#save#0;class#Controller#0" />
+            <element signature="method#previous#0;class#Controller#0" />
+            <element signature="method#lightbox#0;class#Controller#0" />
+            <element signature="method#adicionaPasso#0;class#Controller#0" />
+            <element signature="method#removePasso#0;class#Controller#0" />
+            <element signature="method#limpaListaPassos#0;class#Controller#0" />
+            <element signature="method#setComponents#0;class#Controller#0" />
+            <element signature="method#setDimensoes#0;class#Controller#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/utils/OpenCV.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="116" lean-forward="true" selection-start-line="116" selection-end-line="116" />
+        <state relative-caret-position="506">
+          <caret line="132" lean-forward="true" selection-start-line="132" selection-end-line="132" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#desfoque#0;class#OpenCV#0" />
+            <element signature="initializer##0;class#OpenCV#0" />
+            <element signature="method#tonsDeCinza#0;class#OpenCV#0" />
+            <element signature="method#buscaRetangulos#0;class#OpenCV#0" />
+            <element signature="e#6062#6143#0" />
+            <element signature="method#getFirstThreeCoordinates#0;class#OpenCV#0" />
+            <element signature="e#8741#8773#0" />
           </folding>
         </state>
       </provider>
