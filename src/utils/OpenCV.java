@@ -157,6 +157,7 @@ public class OpenCV {
 
             // verificamos cada contorno
             for(int i=0; i < contours.size(); i++){
+
                 // converte de MatOfPoint to MatOfPoint2f
                 contours.get(i).convertTo(contours.get(i), CvType.CV_32FC2);
                 MatOfPoint2f contorno2f = new MatOfPoint2f(contours.get(i));
@@ -166,7 +167,7 @@ public class OpenCV {
 
                 if(perimetro > 120){
 
-                    Imgproc.approxPolyDP(contorno2f, temp, perimetro * 0.03, true);
+                    Imgproc.approxPolyDP(contorno2f, new MatOfPoint2f(), perimetro * 0.03, true);
 
                     // volta de MatOfPoint2f para MatOfPoint
                     temp.convertTo(contours.get(i), CvType.CV_32S);
@@ -176,17 +177,20 @@ public class OpenCV {
                         System.out.println("PASSOU AQ");
                         Rect rec = Imgproc.boundingRect(contornoMatOfPoint);
                         System.out.println("X: " + rec.x + " y:" + rec.y);
+
+                        Imgproc.rectangle(image, rec, new Scalar(48, 252, 82));
+
                     }
                 }
             }
 
             System.out.println();
 
-            return null;
-//            File output = new File(Controller.CACHE + "/busca-retangulos.png");
-//            ImageIO.write(Utils.matToBufferedImage(contours.get(0)), "png", output);
-//
-//            return Cache.cacheToFile("busca-retangulos.png");
+
+            File output = new File(Controller.CACHE + "/busca-retangulos.png");
+            ImageIO.write(Utils.matToBufferedImage(image), "png", output);
+
+            return Cache.cacheToFile("busca-retangulos.png");
 
         } catch (Exception e){
             e.printStackTrace();

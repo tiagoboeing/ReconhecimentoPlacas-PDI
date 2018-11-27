@@ -131,14 +131,17 @@ public class Controller {
                 break;
 
             case DESFOQUE:
+                imageView.setImage(Cache.cacheToImage("limiarizacao.png"));
                 setComponents("remover", DESFOQUE, LIMIARIZACAO);
                 break;
 
             case BUSCA_CONTORNOS:
+                imageView.setImage(Cache.cacheToImage("desfoque.png"));
                 setComponents("remover", BUSCA_CONTORNOS, DESFOQUE);
                 break;
 
             case SEGMENTACAO_RETANGULOS:
+                imageView.setImage(Cache.cacheToImage("busca-contornos.png"));
                 setComponents("remover", SEGMENTACAO_RETANGULOS, BUSCA_CONTORNOS);
                 break;
         }
