@@ -110,9 +110,7 @@ public class OpenCV {
             Mat srcGray = new Mat();
             Mat dest = new Mat();
             Mat desfoque = new Mat();
-            Mat cannyOutput = new Mat();
             Mat hierarchy = new Mat();
-            MatOfPoint max_contour = new MatOfPoint();
 
             // lista de contornos
             List<MatOfPoint> contours = new ArrayList<>();
@@ -120,8 +118,6 @@ public class OpenCV {
             Imgproc.cvtColor(image, srcGray, Imgproc.COLOR_BGR2GRAY);
             Imgproc.threshold(srcGray, dest, 90, 255, Imgproc.THRESH_BINARY);
             Imgproc.GaussianBlur(dest, desfoque, new Size(5,5), 0);
-
-//            Imgproc.Canny(srcGray, cannyOutput, 0, 255);
             Imgproc.findContours(desfoque, contours, hierarchy, Imgproc.RETR_TREE, Imgproc.CHAIN_APPROX_NONE);
 
             // desenha contornos encontrados
@@ -147,20 +143,17 @@ public class OpenCV {
 
             Mat image = Utils.file2Mat(file);
             Mat srcGray = new Mat();
-            Mat cannyOutput = new Mat();
+            Mat dest = new Mat();
+            Mat desfoque = new Mat();
             Mat hierarchy = new Mat();
-            MatOfPoint max_contour = new MatOfPoint();
 
             // lista de contornos
             List<MatOfPoint> contours = new ArrayList<>();
-            List<MatOfPoint> approx = new ArrayList<>();
 
-            Imgproc.cvtColor(image, new Mat(), Imgproc.COLOR_BGR2GRAY);
-            Imgproc.Canny(srcGray, cannyOutput, 0, 255);
-            Imgproc.findContours(cannyOutput, contours, hierarchy, Imgproc.RETR_TREE, Imgproc.CHAIN_APPROX_NONE);
-
-//            System.out.println("CONTORNOS: " + contours);
-
+            Imgproc.cvtColor(image, srcGray, Imgproc.COLOR_BGR2GRAY);
+            Imgproc.threshold(srcGray, dest, 90, 255, Imgproc.THRESH_BINARY);
+            Imgproc.GaussianBlur(dest, desfoque, new Size(5,5), 0);
+            Imgproc.findContours(desfoque, contours, hierarchy, Imgproc.RETR_TREE, Imgproc.CHAIN_APPROX_NONE);
 
             // verificamos cada contorno
             for(int i=0; i < contours.size(); i++){
@@ -201,6 +194,66 @@ public class OpenCV {
             return null;
         }
     }
+
+//    public static File buscaRetangulos(File file){
+//        try{
+//
+//            Mat image = Utils.file2Mat(file);
+//            Mat srcGray = new Mat();
+//            Mat cannyOutput = new Mat();
+//            Mat hierarchy = new Mat();
+//            MatOfPoint max_contour = new MatOfPoint();
+//
+//            // lista de contornos
+//            List<MatOfPoint> contours = new ArrayList<>();
+//            List<MatOfPoint> approx = new ArrayList<>();
+//
+//            Imgproc.cvtColor(image, new Mat(), Imgproc.COLOR_BGR2GRAY);
+//            Imgproc.Canny(srcGray, cannyOutput, 0, 255);
+//            Imgproc.findContours(cannyOutput, contours, hierarchy, Imgproc.RETR_TREE, Imgproc.CHAIN_APPROX_NONE);
+//
+////            System.out.println("CONTORNOS: " + contours);
+//
+//
+//            // verificamos cada contorno
+//            for(int i=0; i < contours.size(); i++){
+//                // converte de MatOfPoint to MatOfPoint2f
+//                contours.get(i).convertTo(contours.get(i), CvType.CV_32FC2);
+//                MatOfPoint2f contorno2f = new MatOfPoint2f(contours.get(i));
+//                MatOfPoint2f temp = new MatOfPoint2f(contours.get(i));
+//
+//                Double perimetro = Imgproc.arcLength(new MatOfPoint2f(contours.get(i)), true);
+//
+//                if(perimetro > 120){
+//
+//                    Imgproc.approxPolyDP(contorno2f, temp, perimetro * 0.03, true);
+//
+//                    // volta de MatOfPoint2f para MatOfPoint
+//                    temp.convertTo(contours.get(i), CvType.CV_32S);
+//                    MatOfPoint contornoMatOfPoint = new MatOfPoint(temp.toArray());
+//
+//                    if (contornoMatOfPoint.size().height == 4) {
+//                        System.out.println("PASSOU AQ");
+//                        Rect rec = Imgproc.boundingRect(contornoMatOfPoint);
+//                        System.out.println("X: " + rec.x + " y:" + rec.y);
+//                    }
+//                }
+//            }
+//
+//            System.out.println();
+//
+//            return null;
+////            File output = new File(Controller.CACHE + "/busca-retangulos.png");
+////            ImageIO.write(Utils.matToBufferedImage(contours.get(0)), "png", output);
+////
+////            return Cache.cacheToFile("busca-retangulos.png");
+//
+//        } catch (Exception e){
+//            e.printStackTrace();
+//            System.out.println("Problema aplicar buscaRetangulos()");
+//            return null;
+//        }
+//    }
 
 
     public static Point[] getFirstThreeCoordinates(IntBuffer buffer) {
